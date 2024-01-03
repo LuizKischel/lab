@@ -57,7 +57,7 @@ No segundo passo vamos fazer o build desta aplicação em uma imagem docker para
 ## Build da imagem:
 
 Para buildar a imagem basta estar no terminal e na raiz do projeto e rodar o seguite comando:
-**docker build -t lab .**
+COMANDO: "**docker build -t lab .**"
 
 Exemplo de saida após rodar o comando
 
