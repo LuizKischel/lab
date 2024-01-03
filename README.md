@@ -47,3 +47,35 @@ Abra o navegador e acesse o seguinte endereço: http://localhost:3333/health
 Deve aparecer a seguinte mensagem:
 
 ![Alt text](./images/helloworld.png)
+
+Para parar de rodar o projeto pode dar um **CTRL + C**
+
+# Passo 2
+
+No segundo passo vamos fazer o build desta aplicação em uma imagem docker para que possamos rodar esta aplicação em um container.
+
+## Build da imagem:
+
+Para buildar a imagem basta estar no terminal e na raiz do projeto e rodar o seguite comando:
+**docker build -t lab .**
+
+Exemplo de saida após rodar o comando
+
+![Alt text](./images/buildocker.png)
+
+Para visualizar a image você pode rodar o comando **docker images**
+
+Após criar a imagem vamos rodar a api como um container; 
+Para isto deve se rodar o seguinte comando **docker run -d --publish 8080:3333 lab:latest**
+
+Ao rodar este comando iniciará a execução de um container, para ver o container rode **docker ps**
+
+Para validar a execução da API acesso o seguinte endereço no navegador: http://localhost:8080/health
+O retorno deve ser o mesmo "Hello World" visto anteriormente.
+
+Sendo assim garantimos que a aplicação está funcionando perfeitamente via container.
+
+Para para o container digite **docker ps** e depois **docker stop {id}** sendo que no comando docker ps você irá conseguir ver o id do container.
+
+*OBS: Não se esqueça que o {id} deve ser substituido pelo id do container.*
+
