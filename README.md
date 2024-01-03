@@ -18,3 +18,6 @@ Como o repositório é público não necessitará de autenticação.
 ## Depois de clonar deve abrir o projeto no visual studio code:
 
 Para isto, basta abrir o vscode ir no canto esquerdo em "file" e clicar em open folder, depois é só selecionar a pasta lab clonada localmente.
+Você deverá ver algo como isto:
+
+![Alt text](./images/image.png)
