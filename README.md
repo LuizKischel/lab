@@ -80,3 +80,39 @@ Para parar o container digite **docker ps** e depois **docker stop *id*** sendo 
 
 *OBS: Não se esqueça que o {id} deve ser substituido pelo id do container.*
 
+# Passo 3
+
+## Enviar a imagem para um repositório remoto
+
+Para isto você deve acessar o docker hub: https://hub.docker.com/
+Se ainda não tiver, crie uma conta.
+Após criar uma conta no docker hub, vá na aba repositories;
+Clique em create repository;
+E no nome do reposotiry coloque **lab**;
+Na opção de visibility em momento inicial vamos deixar como public;
+Depois clique em create;
+Após criar o repositório, repare que no lado direito terá o comando de como enviar imagem para ele, como na imagem abaixo:
+
+![Alt text](./images/dockerhub.png)
+
+Depois de criar o repositório, taggeie a imagem.
+Para isto digite **docker tag lab:latest *nome do seu dockerhub*:1.0**
+OBS: É muito importante que o "NOME DO SEU DOCKERHUB" seja substituido pelo nome que aparece no seu dockerhub como na imagem abaixo:
+
+![Alt text](./images/nomedockerhub.png)
+
+Para validar digite o comando **docker images** 
+O no output deverá aparecer a imagem lab e uma nova imagem com o novo nome taggeado.
+
+Depois de taggear a imagem podemos fazer o login para subir a imagem, digite:
+**docker login -u *seu usuário* -p *sua senha*** 
+É importante substituir os valores em itálico pelos dados usados no momento de criação da conta dockerhub.
+O resulto esperado do login é a seguinte mensagem:
+**Login Succeeded**
+
+Depois de fazer o login faça o push para seu repositório com o seguinte comando:
+**docker push *nome do seu dockerhub*:1.0**
+
+OBS: Novamente não esqueça de substituir o "NOME DO SEU DOCKERHUB" com o mesmo valor que fez acima.
+
+No final do processo você deverá ver sua imagem de versão 1.0 lá no dockerhub.
