@@ -76,7 +76,7 @@ O retorno deve ser o mesmo "Hello World" visto anteriormente.
 
 Sendo assim garantimos que a aplicação está funcionando perfeitamente via container.
 
-Para para o container digite **docker ps** e depois **docker stop {id}** sendo que no comando docker ps você irá conseguir ver o id do container.
+Para para o container digite **docker ps** e depois **docker stop *id*** sendo que no comando docker ps você irá conseguir ver o id do container.
 
 *OBS: Não se esqueça que o {id} deve ser substituido pelo id do container.*
 
