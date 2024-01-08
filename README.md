@@ -182,7 +182,8 @@ spec:
         - containerPort: 3333
 ```
 
-Após criar o arquivo digite: **kubectl apply -f deployment.yaml -n lab** 
+Após criar o arquivo digite: **kubectl apply -f deployment.yaml -n lab**
+
 IMPORTANTE O ARQUIVO ESTAR NO DIRETÓRIO QUE O COMANDO É EXECUTADO, CASO CONTRÁRIO NÃO IRÁ FUNCIONAR.
 
 Depois disso o comando deve exibir: *deployment.apps/lab-deployment created*
@@ -216,6 +217,7 @@ spec:
 ```
 
 Para criar digite: **kubectl apply -f service.yaml -n lab**
+
 IMPORTANTE O ARQUIVO ESTAR NO DIRETÓRIO QUE O COMANDO É EXECUTADO, CASO CONTRÁRIO NÃO IRÁ FUNCIONAR.
 
 Para ver o service digite: **kubectl get svc -n lab**
