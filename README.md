@@ -190,3 +190,39 @@ Depois disso o comando deve exibir: *deployment.apps/lab-deployment created*
 Para garantir o funcionamento da sua aplicação digite: **kubectl get pods -n lab**
 
 Deverá aparecer o seu pod.
+
+# Passo 5
+
+Expor a aplicação para fora do kubernetes para acessa-lá;
+Para expor ela, temos algumas maneiras, mas vamos utilizar um service do tipo **ClusterIP**
+
+Para o service crie um arquivo chamado *service.yaml* com o código abaixo:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: lab
+  namespace: lab
+  labels:
+    app: lab
+spec:
+  selector:
+    app: lab
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 3333
+```
+
+Para criar digite: **kubectl apply -f service.yaml -n lab**
+IMPORTANTE O ARQUIVO ESTAR NO DIRETÓRIO QUE O COMANDO É EXECUTADO, CASO CONTRÁRIO NÃO IRÁ FUNCIONAR.
+
+Para ver o service digite: **kubectl get svc -n lab**
+
+Agora vamos fazer um encaminhamento para fora do cluster a partir do service, digite:
+**kubectl port-forward svc/lab 9090:8080 -n lab**
+
+Depois, deixe o terminal aberto e cole este endereço no navegador: http://localhost:9090/health
+
+E pronto, você estará acessando sua aplicação hospedada em Kubernetes!!
