@@ -116,3 +116,77 @@ Depois de fazer o login faça o push para seu repositório com o seguinte comand
 OBS: Novamente não esqueça de substituir o "NOME DO SEU DOCKERHUB" com o mesmo valor que fez acima.
 
 No final do processo você deverá ver sua imagem de versão 1.0 lá no dockerhub.
+
+# Passo 4
+
+## Configurar Kubernetes
+
+Primeiro vamos instalar alguns softwares necessários:
+Para instalar o kubectl basta abrir o powershell como administrador e rodar o seguinte comando: **choco install kubernetes-cli**
+
+Se você não tiver o chocolatey instalado poderá baixar no seguinte endereço: https://chocolatey.org/install#individual
+
+Após instalar o kubectl abra o gitbash e digite **kubectl version**
+
+Tendo o kubectl OK, vamos instalar o minikube, é só abrir o powershell e rodar: **choco install minikube**
+
+Quando terminar de instalar, abra o gitbash e digite **minikube start**
+
+Quando o minikube terminar de iniciar rode o comando: **kubectl get pods -n kube-system**
+
+Resultado experado:
+
+![Alt text](./images/pods1.png)
+
+OBS: Se este comando não funcionar rode: **kubectl config use-context minikube** mas somente caso o comando acima não funcionar
+
+Kubernetes funcionando podemos começar a montar nosso ambiente. Vamos criar nossa namespace
+
+Digite: **kubectl create namespace lab**
+
+## Criando os manifestos
+
+No gitbash vocês irão criar 2 arquivos, o primeiro será um com o nome deployment.yaml com o código abaixo;
+Lembrando que no lugar da imagem *luizkischel/lab:1.0* vocês devem alterar para o nome de vocês no dockerhub;
+Este arquivo pode ser criado pelo gitbash com os seguintes comando:
+
+Abra o gitbash e digite: **vim deployment.yaml**
+Depois de abrir o vim, copie o código abaixo (já alterando a imagem) e cole no vim. (para colar é shift + insert)
+Para sair do vim é só digitar **:wq**
+
+*Caso tenha dificuldades de lidar com o Vim, crie o arquivo pelo visual studio code e faça as demais tarefas pelo terminal no visual studio code.*
+
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab-deployment
+  namespace: lab
+  labels:
+    app: lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lab
+  template:
+    metadata:
+      labels:
+        app: lab
+    spec:
+      containers:
+      - name: lab
+        image: luizkischel/lab:1.0 (substituir)
+        ports:
+        - containerPort: 3333
+```
+
+Após criar o arquivo digite: **kubectl apply -f deployment.yaml -n lab** 
+IMPORTANTE O ARQUIVO ESTAR NO DIRETÓRIO QUE O COMANDO É EXECUTADO, CASO CONTRÁRIO NÃO IRÁ FUNCIONAR.
+
+Depois disso o comando deve exibir: *deployment.apps/lab-deployment created*
+
+Para garantir o funcionamento da sua aplicação digite: **kubectl get pods -n lab**
+
+Deverá aparecer o seu pod.
